@@ -13,11 +13,12 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    private String imagen;
 
     @ManyToOne
     @JoinColumn(name = "banda_id", nullable = false)
-    @JsonIgnore
     @JsonBackReference
+    @JsonIgnore
     private Banda banda;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
@@ -25,9 +26,10 @@ public class Album {
     @JsonIgnore
     private List<Cancion> canciones;
 
-    public Album(Long id, String titulo, Banda banda, List<Cancion> canciones) {
+    public Album(Long id, String titulo, String imagen, Banda banda, List<Cancion> canciones) {
         this.id = id;
         this.titulo = titulo;
+        this.imagen = imagen;
         this.banda = banda;
         this.canciones = canciones;
     }
@@ -49,6 +51,14 @@ public class Album {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public Banda getBanda() {

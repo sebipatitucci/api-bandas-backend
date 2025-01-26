@@ -29,18 +29,24 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumDto save(Long bandaId, AlbumDto albumDto) {
-        Boolean existeAlbum = albumRepository.existsByTitulo(albumDto.getTitulo());
         Boolean existeBanda = bandaRepository.existsById(bandaId);
+        if (!existeBanda) {
+            throw new AppException("Banda no encontrada", HttpStatus.NOT_FOUND);
+        }
+        Boolean existeAlbum = albumRepository.existsByTitulo(albumDto.getTitulo());
 
-        if (!existeAlbum && !existeBanda){
+        if (existeAlbum){
+            throw new AppException("El album ya existe", HttpStatus.CONFLICT);
+        }
             Banda banda = bandaRepository.findById(bandaId).orElseThrow(() -> new AppException("Banda no encontrada", HttpStatus.NOT_FOUND));
             Album album = albumMapper.toAlbum(albumDto);
             album.setBanda(banda);
 
-            return albumMapper.toAlbumDto(albumRepository.save(album));
-        }else {
-            throw new AppException("El album ya existe", HttpStatus.CONFLICT);
-        }
+            album = albumRepository.save(album);
+
+            return albumMapper.toAlbumDto(album);
+
+
     }
 
     @Override
@@ -70,8 +76,19 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumDto update(Long id, AlbumDto albumDto) {
+    public AlbumDto update(Long bandaId, Long id, AlbumDto albumDto) {
+        Banda banda = bandaRepository.findById(bandaId)
+                .orElseThrow(() -> new AppException("Banda no encontrada", HttpStatus.NOT_FOUND));
+
         Album album = albumRepository.findById(id).orElseThrow(() -> new AppException("Album no encontrado", HttpStatus.NOT_FOUND));
+
+        if (!album.getBanda().getId().equals(bandaId)) {
+            throw new AppException("El álbum no pertenece a esta banda", HttpStatus.BAD_REQUEST);
+        }
+
+        album.setTitulo(albumDto.getTitulo());
+        album.setImagen(albumDto.getImagen());
+
         albumMapper.updateAlbum(album, albumMapper.toAlbum(albumDto));
         return albumMapper.toAlbumDto(albumRepository.save(album));
     }

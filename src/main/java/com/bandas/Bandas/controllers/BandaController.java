@@ -1,7 +1,6 @@
 package com.bandas.Bandas.controllers;
 
 import com.bandas.Bandas.dto.BandaDto;
-import com.bandas.Bandas.models.Banda;
 import com.bandas.Bandas.services.BandaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

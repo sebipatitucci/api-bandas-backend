@@ -12,6 +12,7 @@ public class Banda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String imagen;
 
     @OneToMany(mappedBy = "banda", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -20,9 +21,10 @@ public class Banda {
     public Banda() {
     }
 
-    public Banda(Long id, String nombre, List<Album> albumes) {
+    public Banda(Long id, String nombre, String imagen, List<Album> albumes) {
         this.id = id;
         this.nombre = nombre;
+        this.imagen = imagen;
         this.albumes = albumes;
     }
 
@@ -40,6 +42,14 @@ public class Banda {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public List<Album> getAlbumes() {

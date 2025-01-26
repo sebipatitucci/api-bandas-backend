@@ -16,7 +16,7 @@ public interface AlbumService {
 
     public AlbumDto findByIdAndBandaId(Long albumId, Long bandaId);
 
-    public AlbumDto update(Long id, AlbumDto albumDto);
+    public AlbumDto update(Long bandaId, Long id, AlbumDto albumDto);
 
     public AlbumDto delete(Long id);
 

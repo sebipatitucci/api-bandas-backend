@@ -48,6 +48,10 @@ public class BandaServiceImpl implements BandaService {
     @Override
     public BandaDto update(Long id, BandaDto bandaDto) {
         Banda banda = bandaRepository.findById(id).orElseThrow(() -> new AppException("Banda no encontrada", HttpStatus.NOT_FOUND));
+
+        banda.setNombre(bandaDto.getNombre());
+        banda.setImagen(bandaDto.getImagen());
+
         bandaMapper.updateBanda(banda, bandaMapper.toBanda(bandaDto));
         return bandaMapper.toBandaDto(bandaRepository.save(banda));
     }

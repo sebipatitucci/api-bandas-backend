@@ -7,14 +7,16 @@ import java.util.List;
 public class BandaDto {
     private Long id;
     private String nombre;
+    private String imagen;
     private List<Album> albumes;
 
     public BandaDto() {
     }
 
-    public BandaDto(Long id, String nombre, List<Album> albumes) {
+    public BandaDto(Long id, String nombre, String imagen, List<Album> albumes) {
         this.id = id;
         this.nombre = nombre;
+        this.imagen = imagen;
         this.albumes = albumes;
     }
 
@@ -32,6 +34,14 @@ public class BandaDto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public List<Album> getAlbumes() {

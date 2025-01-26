@@ -8,17 +8,19 @@ import java.util.List;
 public class AlbumDto {
     private Long id;
     private String titulo;
+    private String imagen;
     private Banda banda;
     private List<Cancion> canciones;
 
-    public AlbumDto() {
-    }
-
-    public AlbumDto(Long id, String titulo, Banda banda, List<Cancion> canciones) {
+    public AlbumDto(Long id, String titulo, String imagen, Banda banda, List<Cancion> canciones) {
         this.id = id;
         this.titulo = titulo;
+        this.imagen = imagen;
         this.banda = banda;
         this.canciones = canciones;
+    }
+
+    public AlbumDto() {
     }
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class AlbumDto {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public List<Cancion> getCanciones() {

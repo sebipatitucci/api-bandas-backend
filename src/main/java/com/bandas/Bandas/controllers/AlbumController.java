@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("bandas/{bandaId}/albumes")
@@ -41,12 +40,12 @@ public class AlbumController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlbumDto> updateBanda(@PathVariable Long id, @RequestBody AlbumDto albumDto){
-        return new ResponseEntity<>(albumService.update(id, albumDto), HttpStatus.OK);
+    public ResponseEntity<AlbumDto> updateAlbum(@PathVariable Long bandaId, @PathVariable Long id, @RequestBody AlbumDto albumDto){
+        return new ResponseEntity<>(albumService.update(bandaId, id, albumDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AlbumDto> deleteBanda(@PathVariable Long id){
+    public ResponseEntity<AlbumDto> deleteAlbum(@PathVariable Long id){
         return new ResponseEntity<>(albumService.delete(id), HttpStatus.OK);
     }
 

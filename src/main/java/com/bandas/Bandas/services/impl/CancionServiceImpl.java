@@ -61,6 +61,9 @@ public class CancionServiceImpl implements CancionService {
     @Override
     public CancionDto update(Long id, CancionDto cancionDto) {
         Cancion cancion = cancionRepository.findById(id).orElseThrow(() -> new AppException("Cancion no encontrada", HttpStatus.NOT_FOUND));
+
+        cancion.setTitulo(cancionDto.getTitulo());
+
         cancionMapper.updateCancion(cancion, cancionMapper.toCancion(cancionDto));
         return cancionMapper.toCancionDto(cancionRepository.save(cancion));
     }

@@ -19,7 +19,7 @@ public interface AlbumMapper {
 
     void updateAlbum(@MappingTarget Album album, Album albumDto);
 
-    default Optional<AlbumDto> toAlbumDto(Optional<Album> album) {
-        return null;
-    }
+//    default Optional<AlbumDto> toAlbumDto(Optional<Album> album) {
+//        return null;
+//    }
 }
